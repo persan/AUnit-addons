@@ -48,7 +48,6 @@ package body AUnit.Reporter.Stream_XML is
    procedure Report_Test (Engine  : XML_Reporter; Test : Test_Result);
    --  Report a single assertion failure or unexpected exception
 
-
    ------------------------------
    --  Catch_Output_And_Error  --
    ------------------------------
@@ -76,7 +75,6 @@ package body AUnit.Reporter.Stream_XML is
          Next (C);
       end loop;
    end Dump_Result_List;
-
 
    -------------
    --  Image  --
@@ -126,8 +124,6 @@ package body AUnit.Reporter.Stream_XML is
       Engine.Output := Stream;
    end;
 
-
-
    -------------
    --  Write  --
    -------------
@@ -138,7 +134,7 @@ package body AUnit.Reporter.Stream_XML is
    begin
       Fd := Open_Read (From_Path, GNAT.OS_Lib.Binary);
       declare
-         Buffer : Stream_Element_Array (1 .. Stream_Element_Offset (File_Length (FD)));
+         Buffer : Stream_Element_Array (1 .. Stream_Element_Offset (File_Length (Fd)));
       begin
          Last := Read (Fd, Buffer'Address, Buffer'Length);
          Stream_Element_Array'Write (Stream, Buffer);
@@ -315,6 +311,5 @@ package body AUnit.Reporter.Stream_XML is
       end if;
       String'Write (Engine.Output, "    </Test>" & ASCII.LF);
    end Report_Test;
-
 
 end AUnit.Reporter.Stream_XML;

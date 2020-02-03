@@ -7,7 +7,6 @@ package body AUnit.Test_Filters.List_Filters is
    use Ada.Text_IO;
    use GNAT.Regpat;
 
-
    function Is_Active
      (Filter : List_Filter;
       T      : AUnit.Tests.Test'Class) return Boolean is
@@ -21,14 +20,14 @@ package body AUnit.Test_Filters.List_Filters is
    ----------
 
    procedure Read (Self : in out List_Filter; Path : String) is
-      Matcher : GNAT.Regpat.Pattern_Matcher := GNAT.Regpat.Compile ("^([1-9a-zA-Z\._]+).*");
+      Matcher : constant GNAT.Regpat.Pattern_Matcher := GNAT.Regpat.Compile ("^([1-9a-zA-Z\._]+).*");
       Matches : GNAT.Regpat.Match_Array (1 .. GNAT.Regpat.Paren_Count (Matcher));
       Inf     : File_Type;
    begin
-      Open (Inf , In_file, Path);
+      Open (Inf, In_File, Path);
       while not End_Of_File (Inf) loop
          declare
-            Line : constant String := Ada.Strings.Fixed.Trim (Ada.Text_IO.Get_Line(Inf), Ada.Strings.Both);
+            Line : constant String := Ada.Strings.Fixed.Trim (Ada.Text_IO.Get_Line (Inf), Ada.Strings.Both);
          begin
             GNAT.Regpat.Match (Matcher, Line, Matches);
             if Matches (Matches'First) /= No_Match then
@@ -43,7 +42,7 @@ package body AUnit.Test_Filters.List_Filters is
                     Path : String) is
       Outf     : File_Type;
    begin
-      Create (Outf , Out_File, Path);
+      Create (Outf, Out_File, Path);
       for I of Self.All_Tests.all loop
          Put_Line (Outf, I);
       end loop;

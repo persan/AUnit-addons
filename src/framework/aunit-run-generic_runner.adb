@@ -6,7 +6,7 @@ with AUnit.Options;
 with AUnit.Reporter.Text;
 with AUnit.Reporter.XML;
 with AUnit.Reporter.Stream_XML;
-with Aunit.Run;
+with AUnit.Run;
 with AUnit.Test_Filters.List_Filters;
 with AUnit.Test_Filters;
 with AUnit;
@@ -14,7 +14,7 @@ with AUnit;
 with GNAT.Command_Line;
 with GNAT.Strings;
 
-procedure Aunit.run.Generic_runner is
+procedure AUnit.run.Generic_runner is
    use GNAT.Command_Line;
    use type GNAT.Strings.String_Access;
    DEFAULT_LIST        : constant String := "testlist.txt";
@@ -35,7 +35,6 @@ procedure Aunit.run.Generic_runner is
    Outf                : Ada.Streams.Stream_IO.File_Type;
 
    Command_Line_Config : Command_Line_Configuration;
-
 
    type Reporter_Access is access all AUnit.Reporter.Reporter'Class;
    Reporter : Reporter_Access := Text_Reporter'Unrestricted_Access;
@@ -64,7 +63,6 @@ begin
       XML_Stream_Reporter.Set_Output (AUnit.Reporter.Stream_XML.Stream_Access (Ada.Streams.Stream_IO.Stream (Outf)));
    end if;
 
-
    if Filter_Path /= null and then Filter_Path.all'Length /= 0 then
       Filter.Read (Filter_Path.all);
       Options.Filter := Filter'Unrestricted_Access;
@@ -73,7 +71,6 @@ begin
       Options.Filter := Filter'Unrestricted_Access;
    end if;
 
-
    if Run (Reporter.all, Options) = AUnit.Success then
       Ada.Command_Line.Set_Exit_Status (Ada.Command_Line.Success);
    else
@@ -81,7 +78,7 @@ begin
    end if;
 
    if Test_List_Save /= null and then Test_List_Save.all'Length /= 0 then
-      Filter.Write(Test_List_Save.all);
+      Filter.Write (Test_List_Save.all);
    end if;
 
    if XML_Report /= null then
@@ -89,6 +86,6 @@ begin
    end if;
 
 exception
-   when GNAT.COMMAND_LINE.EXIT_FROM_COMMAND_LINE  | GNAT.COMMAND_LINE.INVALID_SWITCH  =>
+   when GNAT.Command_Line.Exit_From_Command_Line  | GNAT.Command_Line.Invalid_Switch  =>
       null;
-end Aunit.run.Generic_runner;
+end AUnit.Run.Generic_runner;

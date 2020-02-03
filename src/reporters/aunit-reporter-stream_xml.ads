@@ -46,17 +46,16 @@ package AUnit.Reporter.Stream_XML is
    type Stream_Access is not null access all Ada.Streams.Root_Stream_Type'Class;
 
    procedure Set_Output (Engine  : in out XML_Reporter; Stream : Stream_Access);
-   -- Set the stream for the report.
+   --  Set the stream for the report.
 
    procedure Catch_Output_And_Error (Engine  : in out XML_Reporter);
-   -- A call to this routine will redirct Standard_Output and Standard_Error
-   -- to temporary files and include the contents of these files
-   -- in the final testreport.
+   --  A call to this routine will redirct Standard_Output and Standard_Error
+   --  to temporary files and include the contents of these files
+   --  in the final testreport.
 
    procedure Report (Engine  : XML_Reporter;
                      R       : in out Result'Class;
                      Options : AUnit_Options := Default_Options);
-
 
 private
    type XML_Reporter is new Reporter with record
