@@ -1,7 +1,7 @@
 package AUnit.Assertions.Generic_Helpers is
 
    procedure Assert_Error
-     (Message   : String := "";
+     (Message   : String;
       Source    : String  := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line);
 
@@ -10,7 +10,7 @@ package AUnit.Assertions.Generic_Helpers is
    procedure Assert_Private
      (Actual    : Object_Type;
       Expected  : Object_Type;
-      Message   : String := "";
+      Message   : String;
       Source    : String  := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line);
 
@@ -29,7 +29,7 @@ package AUnit.Assertions.Generic_Helpers is
    procedure Assert_Limited_Private
      (Actual    : Object_Type;
       Expected  : Object_Type;
-      Message   : String := "";
+      Message   : String;
       Source    : String  := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line);
 
@@ -51,7 +51,7 @@ package AUnit.Assertions.Generic_Helpers is
      (Actual    : Num;
       Expected  : Num;
       Tolerance : Num := Default_Tolerance;
-      Message   : String := "";
+      Message   : String;
       Source    : String  := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line);
 
@@ -69,7 +69,7 @@ package AUnit.Assertions.Generic_Helpers is
    procedure Assert_Integer
      (Actual    : Num;
       Expected  : Num;
-      Message   : String := "";
+      Message   : String;
       Source    : String  := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line);
 
@@ -86,7 +86,7 @@ package AUnit.Assertions.Generic_Helpers is
    procedure Assert_Modular
      (Actual    : Num;
       Expected  : Num;
-      Message   : String := "";
+      Message   : String;
       Source    : String  := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line);
 
@@ -103,7 +103,7 @@ package AUnit.Assertions.Generic_Helpers is
    procedure Assert_Enumeration
      (Actual    : Enum;
       Expected  : Enum;
-      Message   : String := "";
+      Message   : String;
       Source    : String  := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line);
 

@@ -6,7 +6,7 @@ package body AUnit.Assertions.Generic_Helpers is
    ------------------
 
    procedure Assert_Error
-     (Message : String  := ""; Source : String := GNAT.Source_Info.File;
+     (Message : String; Source : String := GNAT.Source_Info.File;
       Line    : Natural := GNAT.Source_Info.Line)
    is
    begin
@@ -20,7 +20,7 @@ package body AUnit.Assertions.Generic_Helpers is
    procedure Assert_Private
      (Actual   : Object_Type;
       Expected : Object_Type;
-      Message  : String := "";
+      Message  : String;
       Source   : String  := GNAT.Source_Info.File;
       Line     : Natural := GNAT.Source_Info.Line)
    is
@@ -49,7 +49,7 @@ package body AUnit.Assertions.Generic_Helpers is
    ----------------------------
 
    procedure Assert_Limited_Private
-     (Actual : Object_Type; Expected : Object_Type; Message : String := "";
+     (Actual : Object_Type; Expected : Object_Type; Message : String;
       Source : String  := GNAT.Source_Info.File;
       Line   : Natural := GNAT.Source_Info.Line)
    is
@@ -83,7 +83,7 @@ package body AUnit.Assertions.Generic_Helpers is
      (Actual    : Num;
       Expected  : Num;
       Tolerance : Num := Default_Tolerance;
-      Message   : String  := "";
+      Message   : String;
       Source    : String := GNAT.Source_Info.File;
       Line      : Natural := GNAT.Source_Info.Line)
    is
@@ -114,7 +114,7 @@ package body AUnit.Assertions.Generic_Helpers is
    --------------------
 
    procedure Assert_Integer
-     (Actual : Num; Expected : Num; Message : String := "";
+     (Actual : Num; Expected : Num; Message : String;
       Source : String  := GNAT.Source_Info.File;
       Line   : Natural := GNAT.Source_Info.Line)
    is
@@ -144,7 +144,7 @@ package body AUnit.Assertions.Generic_Helpers is
    --------------------
 
    procedure Assert_Modular
-     (Actual : Num; Expected : Num; Message : String := "";
+     (Actual : Num; Expected : Num; Message : String;
       Source : String  := GNAT.Source_Info.File;
       Line   : Natural := GNAT.Source_Info.Line)
    is
@@ -174,7 +174,7 @@ package body AUnit.Assertions.Generic_Helpers is
    ------------------------
 
    procedure Assert_Enumeration
-     (Actual : Enum; Expected : Enum; Message : String := "";
+     (Actual : Enum; Expected : Enum; Message : String;
       Source : String  := GNAT.Source_Info.File;
       Line   : Natural := GNAT.Source_Info.Line)
    is
