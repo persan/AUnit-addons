@@ -9,7 +9,7 @@
 --  procedure component.children.tests.testcase1.main is
 --     new AUnit.Test_Cases.Simple_Main_Generic(Test_Case);
 --
--- Thus providing a simple main for One_Testcase to be used during development.
+--  Thus providing a simple main for One_Testcase to be used during development.
 --
 --  ----------------------------------------------------------------------------
 with AUnit.Test_Cases;
