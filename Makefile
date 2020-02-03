@@ -3,5 +3,6 @@ all:
 	gprbuild -p -j0
 	
 install:
-	cp src/*.ad? ${DESTDIR}
+	cp src/reporters/*.ad? ${DESTDIR}/reporters/
+	cp src/framework/*.ad? ${DESTDIR}/framework/
 
