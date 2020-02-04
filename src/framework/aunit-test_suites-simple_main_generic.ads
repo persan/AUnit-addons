@@ -12,7 +12,6 @@
 --  Thus providing a simple main for One_Testcase to be used during development.
 --
 --  ----------------------------------------------------------------------------
-with AUnit.Test_Suites;
+with AUnit.Run.Generic_Runner;
 generic
-   with function Suite return AUnit.Test_Suites.Access_Test_Suite is <>;
-procedure AUnit.Test_Suites.Simple_Main_Generic;
+procedure AUnit.Test_Suites.Simple_Main_Generic renames AUnit.Run.Generic_Runner;

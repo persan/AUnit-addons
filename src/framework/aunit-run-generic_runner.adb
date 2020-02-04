@@ -3,6 +3,7 @@ with Ada.Directories;
 with Ada.Streams.Stream_IO;
 
 with AUnit.Options;
+with AUnit.Reporter.GNATtest;
 with AUnit.Reporter.Text;
 with AUnit.Reporter.XML;
 with AUnit.Reporter.Stream_XML;
@@ -14,13 +15,15 @@ with AUnit;
 with GNAT.Command_Line;
 with GNAT.Strings;
 
-procedure AUnit.run.Generic_runner is
+procedure AUnit.Run.Generic_Runner is
+
    use GNAT.Command_Line;
    use type GNAT.Strings.String_Access;
    DEFAULT_LIST        : constant String := "testlist.txt";
 
    function Run is new AUnit.Run.Test_Runner_With_Status (Suite);
    Text_Reporter       : aliased AUnit.Reporter.Text.Text_Reporter;
+   Test_Reporter       : aliased AUnit.Reporter.GNATtest.GNATtest_Reporter;
    XML_Reporter        : aliased AUnit.Reporter.XML.XML_Reporter;
    XML_Stream_Reporter : aliased AUnit.Reporter.Stream_XML.XML_Reporter;
 
@@ -29,6 +32,7 @@ procedure AUnit.run.Generic_runner is
    Filter_Path         : aliased GNAT.Strings.String_Access;
    Test_List_Save      : aliased GNAT.Strings.String_Access;
    Use_Text            : aliased Boolean := True;
+   Use_Test            : aliased Boolean := False;
    Use_XML             : aliased Boolean := False;
 
    XML_Report          : aliased GNAT.Strings.String_Access;
@@ -47,6 +51,7 @@ begin
    Define_Switch (Command_Line_Config, Filter_Path'Unrestricted_Access, "-f?", "--filer?", Help => "Read testcases to run form PATH", Argument => "PATH");
    Define_Switch (Command_Line_Config, Test_List_Save'Unrestricted_Access, "-o=", "", Help => "save a list io testcates to PATH", Argument => "PATH");
 
+   Define_Switch (Command_Line_Config, Use_Test'Unrestricted_Access, "", "--test", Help => "report in gettest format");
    Define_Switch (Command_Line_Config, Use_Text'Unrestricted_Access, "", "--text", Help => "report in XML format");
    Define_Switch (Command_Line_Config, Use_XML'Unrestricted_Access, "", "--xml", Help => "Report in text format");
    Define_Switch (Command_Line_Config, XML_Report'Unrestricted_Access, "", "--XML=", Help => "Report in XML to PATH", Argument => "PATH");
@@ -61,6 +66,8 @@ begin
       Ada.Streams.Stream_IO.Create (Outf, Mode => Ada.Streams.Stream_IO.Out_File, Name => XML_Report.all);
       Reporter := XML_Stream_Reporter'Unrestricted_Access;
       XML_Stream_Reporter.Set_Output (AUnit.Reporter.Stream_XML.Stream_Access (Ada.Streams.Stream_IO.Stream (Outf)));
+   elsif Use_Test then
+      Reporter := Test_Reporter'Unrestricted_Access;
    end if;
 
    if Filter_Path /= null and then Filter_Path.all'Length /= 0 then
@@ -88,4 +95,4 @@ begin
 exception
    when GNAT.Command_Line.Exit_From_Command_Line  | GNAT.Command_Line.Invalid_Switch  =>
       null;
-end AUnit.Run.Generic_runner;
+end AUnit.Run.Generic_Runner;
