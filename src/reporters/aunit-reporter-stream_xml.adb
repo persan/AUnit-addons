@@ -100,19 +100,16 @@ package body AUnit.Reporter.Stream_XML is
    function Image (S : AUnit_Duration) return String is
       Buffer : String (1 .. 40) := (others => ' ');
       Cursor : Natural := Buffer'First;
-      procedure Put (S : String) is
+      Dummy  : AUnit.IO.File_Type;
+
+      procedure Put (Dummy_F : AUnit.IO.File_Type; S : String)  is
       begin
          Buffer (Cursor .. Cursor + S'Length - 1) := S;
          Cursor := Cursor + S'Length;
       end;
-
-      procedure Put (I : Integer) is
-      begin
-         Put (Image (I));
-      end;
       procedure Put is new Gen_Put_Measure;
    begin
-      Put (S);
+      Put (Dummy, S);
       return Buffer (Buffer'First .. Cursor - 1);
    end;
 
@@ -149,7 +146,7 @@ package body AUnit.Reporter.Stream_XML is
    -- Report --
    ------------
    procedure Report (Engine  : XML_Reporter;
-                     R       : in out Result'Class;
+                     R       : Result'Class;
                      Options : AUnit_Options := Default_Options)
    is
       T        : AUnit_Duration;
