@@ -54,7 +54,7 @@ package AUnit.Reporter.Stream_XML is
    --  in the final testreport.
 
    procedure Report (Engine  : XML_Reporter;
-                     R       : Result'Class;
+                     R       : in out Result'Class;
                      Options : AUnit_Options := Default_Options);
 
 private
