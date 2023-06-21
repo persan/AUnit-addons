@@ -13,7 +13,7 @@ project %(project_name)s is
    for Exec_Dir use ".";
    package Builder renames %(parent)s.Builder;
    package Compiler renames %(parent)s.Compiler;
-   package Binder renames %(parent)s.Binder;lastFile
+   package Binder renames %(parent)s.Binder;
    package Linker renames %(parent)s.Linker;
 end  %(project_name)s;"""
 
@@ -22,9 +22,10 @@ procedure %(main_name)s is new AUnit.Test_Cases.Simple_Main_Generic (%(test_case
 """
 
 
+
 class Console_Process(GPS.Console, GPS.Process):
     def on_output2(self, dummy, matched, unmatched):
-        self.on_output( matched, unmatched)
+        self.on_output(matched, unmatched)
 
     def on_output(self, matched, unmatched):
         self.write(unmatched + matched)
@@ -33,7 +34,6 @@ class Console_Process(GPS.Console, GPS.Process):
         self.on_exit(status, unmatched_output)
 
     def on_exit(self, status, unmatched_output):
-        print("-----")
         self.write(unmatched_output)
         if self.state:
             self.state = False
@@ -44,14 +44,14 @@ class Console_Process(GPS.Console, GPS.Process):
     def on_destroy(self):
         self.kill()  # Will call on_exit
 
-    def __init__(self, command, main):
+    def __init__(self, command, main, name="Unit Test"):
         self.state = True
         self.main = main
         GPS.Console.__init__(
-            self, "Unit Test",
+            self, name,
             on_destroy=Console_Process.on_destroy,
             force=False)
-
+        self.clear()
         GPS.Process.__init__(
             self, command, ".+",
             on_exit=Console_Process.on_exit,
@@ -80,6 +80,8 @@ def runTest(f: GPS.File):
 
     context = lal.AnalysisContext()
     unit = context.get_from_file(f.name())
+    if not lastFile:
+        lastFile = f
     if unit.root:
         for node in unit.root.finditer(lambda n: n.is_a(lal.PackageDecl)):
             tc_name = (node.children[0].text)
@@ -114,10 +116,12 @@ def runTest(f: GPS.File):
 
         with open(join(targetDir, ada2file(main_name)), "w") as outf:
             outf.write(MAIN_TEMPLATE % params)
+
         Build = Console_Process(["gprbuild", "-P", "%s" % project_path],
-                                        join(targetDir,splitext(ada2file(main_name))[0]))
+                                join(targetDir, splitext(ada2file(main_name))[0]),
+                                "Unit Test:%s" % main_name)
     else:
-        GPS.Console.Write("No Test_Case for %s found" % basename(f.name()))
+        GPS.MDI.dialog("No Test_Case for %s found" % basename(f.name()))
 
 
 @gs_utils.interactive("Editor", toolbar="main", name="Run TC")

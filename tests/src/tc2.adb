@@ -1,4 +1,4 @@
-package body Tc is
+package body Tc2 is
 
    use Aunit;
 
@@ -17,4 +17,4 @@ package body Tc is
       AUnit.Test_Cases.Registration.Register_Routine (Test, Test_Routine'Access, "Test_Routine");
    end;
 
-end Tc;
+end Tc2;
