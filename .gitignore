@@ -16,3 +16,6 @@ messages.txt
 _
 *.bexch
 *main
+.obj
+*.pyc
+out.xml

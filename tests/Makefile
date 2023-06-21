@@ -1,3 +1,4 @@
+export PATH:=${CURDIR}/bin:${PATH}
 all:
 	gprbuild
-	bin/main
+	suits-main

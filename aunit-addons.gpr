@@ -7,14 +7,18 @@ library project AUnit.Addons extends "aunit.gpr" is
    for Library_Dir use "lib";
    for Library_Kind use "static";
 
+   package Builder is
+      for Switches (others) use ("-j0", "-k");
+   end Builder;
+
    package Compiler is
       for Driver ("Markdown") use "";
       for Driver ("Makefile") use "";
       for Switches ("ada") use ("-gnatwa", "-gnatyABabcdfhiklnprtux");
    end Compiler;
 
-   package Naming is
 
+   package Naming is
       for Specification_Suffix ("Markdown") use ".md";
       for Specification_Suffix ("Makefile") use ".mk";
       for Specification_Exceptions  ("Makefile") use  ("Makefile");
