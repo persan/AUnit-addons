@@ -17,13 +17,14 @@ overriding procedure Register_Tests (Test : in out Test_Case) is
 begin
 %(registrations)s
 end Register_Tests;
---  end read only"""
+--  end read only
+"""
 
 
 matcher = re.compile("(" +
                      "procedure\s+(\w+)\s*\(\s*\w+\s*:\s*in\s*out\s*AUnit.Test_Cases.Test_Case'Class\)\s*is" +
                      "|" + "package\s*body\s*(\S+)\s*is" +
-                     "|" + "(overriding\s+|)procedure\s+Register_Tests\s*\(\S+\s*:\s*in\s+out\s+Test_Case\)\s*is\s+separate\s*;" +
+                     "|" + "(overriding\s+|\s+)procedure\s+Register_Tests\s*\(\S+\s*:\s*in\s+out\s+Test_Case\)\s*is\s+separate\s*;" +
                      ")", re.I)
 
 
@@ -47,7 +48,9 @@ def on_file_saved(hook_name, f):
                     UnitName = matches.group(3)
                 elif matches.group(4):
                     shall_generate = True
-
+    print(testRoutines)
+    print(UnitName)
+    print(shall_generate)
     if shall_generate and UnitName and testRoutines:
         register_name = UnitName + ".Register_Tests"
         registrations = []
@@ -58,4 +61,6 @@ def on_file_saved(hook_name, f):
             outf.write(REGISTER_TESTS_TEMPLATE % {"package_name":  UnitName,
                                                   "registrations": "\n".join(registrations)})
 
+
 GPS.Hook("file_saved").add(on_file_saved)
+#on_file_saved (None,GPS.File("tc.adb"))

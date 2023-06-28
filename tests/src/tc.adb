@@ -1,6 +1,6 @@
 package body Tc is
 
-   use Aunit;
+   use AUnit;
 
    function Name (Test : Test_Case) return AUnit.Message_String is
    begin
@@ -12,9 +12,16 @@ package body Tc is
       null;
    end;
 
-   procedure Register_Tests (Test : in out Test_Case) is
+   procedure Test_Routine2 (Tc : in out AUnit.Test_Cases.Test_Case'Class) is
    begin
-      AUnit.Test_Cases.Registration.Register_Routine (Test, Test_Routine'Access, "Test_Routine");
+      null;
    end;
+
+   procedure Test_Routine4 (Tc : in out AUnit.Test_Cases.Test_Case'Class) is
+   begin
+      null;
+   end;
+
+   overriding procedure Register_Tests (Test : in out Test_Case) is separate;
 
 end Tc;

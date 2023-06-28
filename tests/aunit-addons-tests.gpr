@@ -3,7 +3,7 @@ project Aunit.Addons.Tests is
    for Create_Missing_Dirs use "True";
    for Source_Dirs use ("src/**");
    for Object_Dir use ".obj";
-   for Main use ("suits-main.ads");
+   for Main use ("suits-main2.ads");
 
    for Exec_Dir use "bin";
 

@@ -1,8 +1,8 @@
 library project AUnit.Addons extends "aunit.gpr" is
 
-   for Languages use ("Ada","Makefile","Markdown");
+   for Languages use ("Ada","Makefile","Markdown","Python");
    for Library_Name use project'Name;
-   for Source_Dirs use (".","src/**");
+   for Source_Dirs use (".","src/**","support");
    for Object_Dir use ".obj";
    for Library_Dir use "lib";
    for Library_Kind use "static";
@@ -14,13 +14,16 @@ library project AUnit.Addons extends "aunit.gpr" is
    package Compiler is
       for Driver ("Markdown") use "";
       for Driver ("Makefile") use "";
+      for Driver ("Python") use "";
       for Switches ("ada") use ("-gnatwa", "-gnatyABabcdfhiklnprtux");
+      for Switches ("aunit-reporter-junit.adb") use ();
    end Compiler;
 
 
    package Naming is
       for Specification_Suffix ("Markdown") use ".md";
       for Specification_Suffix ("Makefile") use ".mk";
+      for Implementation_Suffix ("Python") use ".py";
       for Specification_Exceptions  ("Makefile") use  ("Makefile");
    end Naming;
 

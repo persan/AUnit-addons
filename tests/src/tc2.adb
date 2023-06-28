@@ -1,6 +1,6 @@
 package body Tc2 is
 
-   use Aunit;
+   use AUnit;
 
    function Name (Test : Test_Case) return AUnit.Message_String is
    begin

@@ -18,6 +18,7 @@ install:
 	@(cd src;     tar -c `find -name "*.ad?"`) | (cd ${DESTDIR}/include/aunit; tar -x)
 	@(cd support; tar -c `find -name "*.py"`)  | (cd ${DESTDIR}/support; tar -x)
 	sed "s-../../support/aunit.xml-../../support/aunit*-" ${DESTDIR}/lib/gnat/aunit.gpr -i
+
 test:
 	${MAKE} -C tests
 clean:
