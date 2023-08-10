@@ -12,7 +12,7 @@ package body Tc is
       null;
    end;
 
-   procedure Test_Routine2 (Tc : in out AUnit.Test_Cases.Test_Case'Class) is
+   procedure Test_Routine33 (Tc : in out AUnit.Test_Cases.Test_Case'Class) is
    begin
       null;
    end;

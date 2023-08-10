@@ -16,4 +16,7 @@ project Aunit.Addons.Tests is
    end Binder;
    package Linker is
    end Linker;
+   package AUnit is
+      for Automation use "True";
+   end AUnit;
 end Aunit.Addons.Tests;
